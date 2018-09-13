@@ -4,11 +4,11 @@ const express = require('express')
   , massive = require('massive')
   , axios = require('axios')
   , controller = require('./controller')
-  
-  
+
+
 const app = express();
 
-app.use( express.static( `${__dirname}/../build` ) );
+app.use(express.static(`${__dirname}/../build`));
 
 const {
   SERVER_PORT,
@@ -17,8 +17,8 @@ const {
   REACT_APP_DOMAIN,
   CLIENT_SECRET,
   CONNECTION_STRING,
-  NODE_ENV
-
+  NODE_ENV,
+  AUTH_URI
 } = process.env;
 
 massive(CONNECTION_STRING).then(db => {
@@ -41,7 +41,7 @@ app.get('/auth/callback', async (req, res) => {
     client_secret: CLIENT_SECRET,
     code: req.query.code,
     grant_type: `authorization_code`,
-    redirect_uri: `http://${req.headers.host}/auth/callback`
+    redirect_uri: AUTH_URI
   };
   let resWithToken = await axios.post(
     `https://${REACT_APP_DOMAIN}/oauth/token`,
@@ -89,16 +89,16 @@ app.get('/api/user-data', (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.redirect=process.env.REACT_APP_LOGIN
+  res.redirect = process.env.REACT_APP_LOGIN
 })
 
 // lets make some data manipulating end points //
 
 app.post('/api/saveInfo', controller.create)
 
-app.get('/api/getContact', controller.getUserData )
+app.get('/api/getContact', controller.getUserData)
 
-app.get('/api/userSession', (req, res)=>{
+app.get('/api/userSession', (req, res) => {
   res.status(200).send(req.session.user)
 })
 

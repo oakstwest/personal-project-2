@@ -32,15 +32,36 @@ class Info_Entry extends Component {
             },
             returned: false
         }
+    }
 
+    updateDoctor(id, doctor_name, email, phone) {
+        let body = { doctor_name, email, phone }
+        axios.put(`/api/updateDoctor/${id}`, body)
+            .then(() => {
+                this.getContact()
+            })
+    }
+
+    updateFriend(id, friend_name, email, phone) {
+        let body = { friend_name, email, phone }
+        axios.put(`/api/updateFriend/${id}`, body)
+            .then(() => {
+                this.getContact()
+            })
     }
 
     delete(id) {
         axios.delete(`/api/delete/${id}`)
+            .then(() => {
+                this.getContact()
+            })
     }
 
     deleteFriend(id) {
         axios.delete(`/api/deleteFriend/${id}`)
+            .then(() => {
+                this.getContact()
+            })
     }
 
     componentDidMount() {
@@ -70,108 +91,109 @@ class Info_Entry extends Component {
     //////////////// FRIEND1 STUFF
     handleFriendName(event) {
         this.setState({
-            friend1: event.target.value
+            newData: Object.assign({}, this.state.newData, { friend1: event.target.value })
         })
     }
     handleFriendEmail(event) {
         this.setState({
-            email1: event.target.value
+            newData: Object.assign({}, this.state.newData, { email1: event.target.value })
         })
     }
 
     handleFriendPhone(event) {
         this.setState({
-            phone1: event.target.value
+            newData: Object.assign({}, this.state.newData, { phone1: event.target.value })
         })
     }
     //////////////FRIEND2 STUFF
     handleFriendName2(event) {
         this.setState({
-            friend2: event.target.value
+            newData: Object.assign({}, this.state.newData, { friend2: event.target.value })
         })
     }
 
     handleFriendEmail2(event) {
         this.setState({
-            email2: event.target.value
+            newData: Object.assign({}, this.state.newData, { email2: event.target.value })
         })
     }
 
     handleFriendPhone2(event) {
         this.setState({
-            phone2: event.target.value
+            newData: Object.assign({}, this.state.newData, { phone2: event.target.value })
         })
     }
     //////////////FRIEND3 STUFF
     handleFriendName3(event) {
         this.setState({
-            friend3: event.target.value
+            newData: Object.assign({}, this.state.newData, { friend3: event.target.value })
         })
     }
 
     handleFriendEmail3(event) {
         this.setState({
-            email3: event.target.value
+            newData: Object.assign({}, this.state.newData, { email3: event.target.value })
         })
     }
 
     handleFriendPhone3(event) {
         this.setState({
-            phone3: event.target.value
+            newData: Object.assign({}, this.state.newData, { phone3: event.target.value })
         })
     }
     ///////////////FRIEND4 STUFF   
     handleFriendName4(event) {
         this.setState({
-            friend4: event.target.value
+            newData: Object.assign({}, this.state.newData, { friend4: event.target.value })
         })
     }
 
     handleFriendEmail4(event) {
         this.setState({
-            email4: event.target.value
+            newData: Object.assign({}, this.state.newData, { email4: event.target.value })
         })
     }
 
     handleFriendPhone4(event) {
         this.setState({
-            phone4: event.target.value
+            newData: Object.assign({}, this.state.newData, { phone4: event.target.value })
         })
     }
     //////////////// DOCTOR STUFF    
     handleDoctorName(event) {
         this.setState({
-            doctor: event.target.value
+            newData: Object.assign({}, this.state.newData, { doctor: event.target.value })
         })
     }
 
     handleDoctorEmail(event) {
         this.setState({
-            doctor_email: event.target.value
+            newData: Object.assign({}, this.state.newData, { doctor_email: event.target.value })
         })
     }
 
     handleDoctorPhone(event) {
         this.setState({
-            doctor_phone: event.target.value
+            newData: Object.assign({}, this.state.newData, { doctor_phone: event.target.value })
         })
     }
     ///////////////// THERAPIST STUFF    
     handleTherapistName(event) {
         this.setState({
-            therapist: event.target.value
+            newData: Object.assign({}, this.state.newData, { therapist: event.target.value })
         })
     }
 
     handleTherapistEmail(event) {
         this.setState({
-            therapist_email: event.target.value
+            newData: Object.assign({}, this.state.newData, { therapist_email: event.target.value })
         })
     }
 
     handleTherapistPhone(event) {
         this.setState({
-            therapist_phone: event.target.value
+            newData: Object.assign({}, this.state.newData, { therapist_phone: event.target.value })
+
         })
     }
     /////////////////
@@ -179,7 +201,8 @@ class Info_Entry extends Component {
         console.log(this.state)
         const {
             returned,
-            contacts
+            contacts,
+            newData
         } = this.state
 
         return (
@@ -187,7 +210,13 @@ class Info_Entry extends Component {
             <div>
                 <h1> Lets Set Up Your Support System</h1>
 
-                <h2>Your Friend</h2>   <button>Edit</button>
+                <h2>Your Friend</h2> 
+                 <button onClick={() => this.updateFriend(
+                    contacts.userFriend[0].friend_id,
+                    newData.friend1,
+                    newData.email1,
+                    newData.phone1
+                )}>Edit</button>
                 <button onClick={() => this.deleteFriend(contacts.userFriend[0].friend_id)}>Delete</button>
                 <input
                     placeholder={contacts.userFriend[0] ? contacts.userFriend[0].friend_name : ''}
@@ -205,7 +234,13 @@ class Info_Entry extends Component {
                 />
 
 
-                <h2>Another Friend</h2> <button>Edit</button>
+                <h2>Another Friend</h2>
+                <button onClick={() => this.updateFriend(
+                    contacts.userFriend[1].friend_id,
+                    newData.friend2,
+                    newData.email2,
+                    newData.phone2
+                )}>Edit</button>
                 <button onClick={() => this.deleteFriend(contacts.userFriend[1].friend_id)}>Delete</button>
                 <input
                     placeholder={contacts.userFriend[1] ? contacts.userFriend[1].friend_name : ''}
@@ -223,7 +258,13 @@ class Info_Entry extends Component {
                 />
 
 
-                <h2>Another Friend</h2> <button>Edit</button>
+                <h2>Another Friend</h2> 
+                <button onClick={() => this.updateFriend(
+                    contacts.userFriend[2].friend_id,
+                    newData.friend3,
+                    newData.email3,
+                    newData.phone3
+                )}>Edit</button>
                 <button onClick={() => this.deleteFriend(contacts.userFriend[2].friend_id)}>Delete</button>
                 <input
                     placeholder={contacts.userFriend[2] ? contacts.userFriend[2].friend_name : ''}
@@ -241,7 +282,13 @@ class Info_Entry extends Component {
                 />
 
 
-                <h2>Another Friend</h2> <button>Edit</button>
+                <h2>Another Friend</h2> 
+                <button onClick={() => this.updateFriend(
+                    contacts.userFriend[3].friend_id,
+                    newData.friend4,
+                    newData.email4,
+                    newData.phone4
+                )}>Edit</button>
                 <button onClick={() => this.deleteFriend(contacts.userFriend[3].friend_id)}>Delete</button>
                 <input
                     placeholder={contacts.userFriend[3] ? contacts.userFriend[3].friend_name : ''}
@@ -259,7 +306,13 @@ class Info_Entry extends Component {
                 />
 
 
-                <h2>Your Doctor</h2> <button>Edit</button>
+                <h2>Your Doctor</h2>
+                <button onClick={() => this.updateDoctor(
+                    contacts.userDoctor[0].doctor_id,
+                    newData.doctor,
+                    newData.doctor_email,
+                    newData.doctor_phone
+                )}>Edit</button>
                 <button onClick={() => this.delete(contacts.userDoctor[0].doctor_id)} >Delete</button>
                 <input
                     placeholder={contacts.userDoctor[0] ? contacts.userDoctor[0].doctor_name : ''}
@@ -277,7 +330,14 @@ class Info_Entry extends Component {
                 />
 
 
-                <h2>Your Therapist</h2> <button>Edit</button>
+                <h2>Your Therapist</h2>
+                <button onClick={() => this.updateDoctor(
+                    contacts.userDoctor[1].doctor_id,
+                    newData.therapist,
+                    newData.therapist_email,
+                    newData.therapist_phone
+                )}>Edit</button>
+
                 <button onClick={() => this.delete(contacts.userDoctor[1].doctor_id)}>Delete</button>
                 <input
                     placeholder={contacts.userDoctor[1] ? contacts.userDoctor[1].doctor_name : ''}
@@ -296,7 +356,7 @@ class Info_Entry extends Component {
 
                 <button onClick={() => this.saveInfo()}>Save</button>
 
-            </div>
+            </div >
 
         )
     }

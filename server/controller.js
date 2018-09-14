@@ -42,8 +42,8 @@ module.exports = {
   },
 
   getUserData: async (req, res) => {
-   const { user_id = 1 } = req.session.user
- 
+    const { user_id = 1 } = req.session.user
+
     let userFriend = await req.app.get('db').friend.get_friends([user_id]);
     let userDoctor = await req.app.get('db').doctors.get_doctors([user_id]);
 
@@ -53,22 +53,51 @@ module.exports = {
 
   },
 
-  delete:(req, res) =>{
-    console.log(req.params.contactId)
-    req.app.get('db').doctors.delete_doctor([req.params.contactId])
-    .then (()=> {
-      res.sendStatus(200)
-    })
+
+  updateDoctor: (req, res) => {
+    const {
+      doctor_id
+    } = req.params
+    const {
+      doctor_name,
+      email,
+      phone
+    } = req.body
+    req.app.get('db').doctors.update_doctor([doctor_name, email, phone, doctor_id])
+      .then(() => {
+        res.sendStatus(200)
+      })
   },
 
-  deleteFriend:(req, res) =>{
+  updateFriend: (req, res) => {
+    const {
+      friend_id
+    } = req.params
+    const {
+      friend_name,
+      email,
+      phone
+    } = req.body
+    console.log(friend_name)
+    req.app.get('db').friend.update_friend([friend_name, email, phone, friend_id])
+      .then(() => {
+        res.sendStatus(200)
+      })
+  },
+
+  delete: (req, res) => {
+    req.app.get('db').doctors.delete_doctor([req.params.contactId])
+      .then(() => {
+        res.sendStatus(200)
+      })
+  },
+
+  deleteFriend: (req, res) => {
     req.app.get('db').friend.delete_friend([req.params.contactId])
-    .then (()=>{
-      res.sendStatus(200)
-    })
-  }
-
-
+      .then(() => {
+        res.sendStatus(200)
+      })
+  },
 }
 
 

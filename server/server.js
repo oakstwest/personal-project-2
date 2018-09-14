@@ -106,7 +106,12 @@ app.delete('/api/delete/:contactId', controller.delete)
 
 app.delete('/api/deleteFriend/:contactId', controller.deleteFriend)
 
+app.put('/api/updateDoctor/:doctor_id', controller.updateDoctor)
+
+app.put('/api/updateFriend/:friend_id', controller.updateFriend)
+
 // app.get('/test', controller.sendEmail)
+
 
 
 

@@ -1,2 +1,2 @@
-delete from friend
+delete from friends
 where friend_id = $1;

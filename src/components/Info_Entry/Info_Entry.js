@@ -1,27 +1,37 @@
 import React, { Component } from 'react';
 //import './Info_Entry.css'
 import axios from 'axios'
-import styled, {css} from 'styled-components'
+import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
 
-const Input= styled.input`
-input[type=text], select, textarea{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
+const InputParent = styled.div`
+    /* width: 50%; */
+    /* padding: 2px 2px;
+    margin: 1px 0;
+    border-radius: 4px; */
+    box-sizing: border-box;
     display:flex;
-    flex-direction:column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    `
 
-}`
+const Input = styled.input`
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 4px;
+    box-sizing: border-box;
+    display:flex;
+    align-items: center;`
 
 const mainColor = 'black'
 
 const Title = styled.h1`
   color: ${props => props.color || 'black'};
-  font-size: 5em;
-  margin: 25px ;
-  padding-bottom: 20px;
+  font-size: 80px;
+  margin:10px ;
+  padding-bottom: 10px;
   display: inline-block;
   text-align: center;
   width: 100vw;
@@ -34,9 +44,9 @@ const Title = styled.h1`
 `
 const SecTitle = styled.h2`
 color: ${props => props.color || 'black'};
-  font-size: 50px;
-  margin: 25px;
-  padding-bottom: 20px;
+  font-size: 40px;
+  margin: 2px;
+  padding-bottom: 10px;
   display: inline-block;
   width: 100vw;
   height: 10vh;
@@ -47,9 +57,9 @@ color: ${props => props.color || 'black'};
 		-1px 1px 0 #FFFFFF,
 		1px 1px 0 #FFFFFF;
 `
-const ThirdTitle = styled.h4`
+const Lable = styled.label`
 color: ${props => props.color || 'black'};
-  font-size: 35px;
+  font-size:40px;
   margin: 25px;
   padding-bottom: 20px;
   display: inline-block;
@@ -66,15 +76,18 @@ color: ${props => props.color || 'black'};
 const Button = styled.button`
 border-radius: 5px;
 padding: .50em 2em ;
-margin: 10px auto;
+/* margin: 10px auto; */
 background: #0156e4;
 color: WHITE;
 border: 2px solid BLACK;
-display: flex;
-  flex-flow: column wrap;
+/* display: flex;
+  flex-flow: column wrap; */
   height: 100%;
   font-size: 30px;`
 
+const ButtonContainer = styled.div`
+display:flex;
+`
 
 
 class Info_Entry extends Component {
@@ -282,27 +295,34 @@ class Info_Entry extends Component {
 
         return (
 
-            <div>
-                <Title> Lets Set Up Your Support System</Title>
-
+            <InputParent>
+                <div>
+                    <Title> Lets Set Up Your Support System</Title>
+                </div>
                 <SecTitle>Your Friend</SecTitle>
-                <button onClick={() => this.updateFriend(
-                    contacts.userFriend[0].friend_id,
-                    newData.friend1,
-                    newData.email1,
-                    newData.phone1
-                )}>Edit</button>
-                <button onClick={() => this.deleteFriend(contacts.userFriend[0].friend_id)}>Delete</button>
+
+                <ButtonContainer>
+                    <Button onClick={() => this.updateFriend(
+                        contacts.userFriend[0].friend_id,
+                        newData.friend1,
+                        newData.email1,
+                        newData.phone1
+                    )}>Edit
+                    </Button>
+                    <Button onClick={() => this.deleteFriend(contacts.userFriend[0].friend_id)}>Delete
+                    </Button>
+                </ButtonContainer>
+
                 <Input
                     placeholder={contacts.userFriend[0] ? contacts.userFriend[0].friend_name : ''}
                     onChange={(event) => this.handleFriendName(event)}
                 />
-                <ThirdTitle>Their Email</ThirdTitle>
+                <Lable>Their Email</Lable>
                 <Input
                     placeholder={contacts.userFriend[0] ? contacts.userFriend[0].email : ''}
                     onChange={(event) => this.handleFriendEmail(event)}
                 />
-                <ThirdTitle>Their Phone Number</ThirdTitle>
+                <Lable>Their Phone Number</Lable>
                 <Input
                     placeholder={contacts.userFriend[0] ? contacts.userFriend[0].phone : ''}
                     onChange={(event) => this.handleFriendPhone(event)}
@@ -310,23 +330,28 @@ class Info_Entry extends Component {
 
 
                 <SecTitle>Another Friend</SecTitle>
-                <button onClick={() => this.updateFriend(
-                    contacts.userFriend[1].friend_id,
-                    newData.friend2,
-                    newData.email2,
-                    newData.phone2
-                )}>Edit</button>
-                <button onClick={() => this.deleteFriend(contacts.userFriend[1].friend_id)}>Delete</button>
+
+                <ButtonContainer>
+                    <Button onClick={() => this.updateFriend(
+                        contacts.userFriend[1].friend_id,
+                        newData.friend2,
+                        newData.email2,
+                        newData.phone2
+                    )}>Edit</Button>
+                    <Button onClick={() => this.deleteFriend(contacts.userFriend[1].friend_id)}>Delete
+                </Button>
+                </ButtonContainer>
+
                 <Input
                     placeholder={contacts.userFriend[1] ? contacts.userFriend[1].friend_name : ''}
                     onChange={(event) => this.handleFriendName2(event)}
                 />
-                <ThirdTitle>Their Email</ThirdTitle>
+                <Lable>Their Email</Lable>
                 <Input
                     placeholder={contacts.userFriend[1] ? contacts.userFriend[1].email : ''}
                     onChange={(event) => this.handleFriendEmail2(event)}
                 />
-                <ThirdTitle>Their Phone Number</ThirdTitle>
+                <Lable>Their Phone Number</Lable>
                 <Input
                     placeholder={contacts.userFriend[1] ? contacts.userFriend[1].phone : ''}
                     onChange={(event) => this.handleFriendPhone2(event)}
@@ -334,23 +359,28 @@ class Info_Entry extends Component {
 
 
                 <SecTitle>Another Friend</SecTitle>
-                <button onClick={() => this.updateFriend(
-                    contacts.userFriend[2].friend_id,
-                    newData.friend3,
-                    newData.email3,
-                    newData.phone3
-                )}>Edit</button>
-                <button onClick={() => this.deleteFriend(contacts.userFriend[2].friend_id)}>Delete</button>
+
+                <ButtonContainer>
+                    <Button onClick={() => this.updateFriend(
+                        contacts.userFriend[2].friend_id,
+                        newData.friend3,
+                        newData.email3,
+                        newData.phone3
+                    )}>Edit</Button>
+                    <Button onClick={() => this.deleteFriend(contacts.userFriend[2].friend_id)}>Delete
+                </Button>
+                </ButtonContainer>
+
                 <Input
                     placeholder={contacts.userFriend[2] ? contacts.userFriend[2].friend_name : ''}
                     onChange={(event) => this.handleFriendName3(event)}
                 />
-                <ThirdTitle>Their Email</ThirdTitle>
+                <Lable>Their Email</Lable>
                 <Input
                     placeholder={contacts.userFriend[2] ? contacts.userFriend[2].email : ''}
                     onChange={(event) => this.handleFriendEmail3(event)}
                 />
-                <ThirdTitle>Their Phone Number</ThirdTitle>
+                <Lable>Their Phone Number</Lable>
                 <Input
                     placeholder={contacts.userFriend[2] ? contacts.userFriend[2].phone : ''}
                     onChange={(event) => this.handleFriendPhone3(event)}
@@ -358,23 +388,28 @@ class Info_Entry extends Component {
 
 
                 <SecTitle>Another Friend</SecTitle>
-                <button onClick={() => this.updateFriend(
-                    contacts.userFriend[3].friend_id,
-                    newData.friend4,
-                    newData.email4,
-                    newData.phone4
-                )}>Edit</button>
-                <button onClick={() => this.deleteFriend(contacts.userFriend[3].friend_id)}>Delete</button>
+
+                <ButtonContainer>
+                    <Button onClick={() => this.updateFriend(
+                        contacts.userFriend[3].friend_id,
+                        newData.friend4,
+                        newData.email4,
+                        newData.phone4
+                    )}>Edit</Button>
+                    <Button onClick={() => this.deleteFriend(contacts.userFriend[3].friend_id)}>Delete
+                </Button>
+                </ButtonContainer>
+
                 <Input
                     placeholder={contacts.userFriend[3] ? contacts.userFriend[3].friend_name : ''}
                     onChange={(event) => this.handleFriendName4(event)}
                 />
-                <ThirdTitle>Their Email</ThirdTitle>
+                <Lable>Their Email</Lable>
                 <Input
                     placeholder={contacts.userFriend[3] ? contacts.userFriend[3].email : ''}
                     onChange={(event) => this.handleFriendEmail4(event)}
                 />
-                <ThirdTitle>Their Phone Number</ThirdTitle>
+                <Lable>Their Phone Number</Lable>
                 <Input
                     placeholder={contacts.userFriend[3] ? contacts.userFriend[3].phone : ''}
                     onChange={(event) => this.handleFriendPhone4(event)}
@@ -382,23 +417,29 @@ class Info_Entry extends Component {
 
 
                 <SecTitle>Your Doctor</SecTitle>
-                <button onClick={() => this.updateDoctor(
-                    contacts.userDoctor[0].doctor_id,
-                    newData.doctor,
-                    newData.doctor_email,
-                    newData.doctor_phone
-                )}>Edit</button>
-                <button onClick={() => this.delete(contacts.userDoctor[0].doctor_id)} >Delete</button>
+
+                <ButtonContainer>
+                    <Button onClick={() => this.updateDoctor(
+                        contacts.userDoctor[0].doctor_id,
+                        newData.doctor,
+                        newData.doctor_email,
+                        newData.doctor_phone
+                    )}>Edit</Button>
+                    <Button onClick={() => this.delete(contacts.userDoctor[0].doctor_id)}>
+                        Delete
+                </Button>
+                </ButtonContainer>
+
                 <Input
                     placeholder={contacts.userDoctor[0] ? contacts.userDoctor[0].doctor_name : ''}
                     onChange={(event) => this.handleDoctorName(event)}
                 />
-                <ThirdTitle>Their Email</ThirdTitle>
+                <Lable>Their Email</Lable>
                 <Input
                     placeholder={contacts.userDoctor[0] ? contacts.userDoctor[0].email : ''}
                     onChange={(event) => this.handleDoctorEmail(event)}
                 />
-                <ThirdTitle>Their Phone Number</ThirdTitle>
+                <Lable>Their Phone Number</Lable>
                 <Input
                     placeholder={contacts.userDoctor[0] ? contacts.userDoctor[0].phone : ''}
                     onChange={(event) => this.handleDoctorPhone(event)}
@@ -406,32 +447,47 @@ class Info_Entry extends Component {
 
 
                 <SecTitle>Your Therapist</SecTitle>
-                <button onClick={() => this.updateDoctor(
-                    contacts.userDoctor[1].doctor_id,
-                    newData.therapist,
-                    newData.therapist_email,
-                    newData.therapist_phone
-                )}>Edit</button>
+                <ButtonContainer>
+                    <Button onClick={() => this.updateDoctor(
+                        contacts.userDoctor[1].doctor_id,
+                        newData.therapist,
+                        newData.therapist_email,
+                        newData.therapist_phone
+                    )}>Edit</Button>
 
-                <button onClick={() => this.delete(contacts.userDoctor[1].doctor_id)}>Delete</button>
+                    <Button onClick={() => this.delete(contacts.userDoctor[1].doctor_id)}>
+                        Delete
+                </Button>
+                </ButtonContainer>
+
                 <Input
                     placeholder={contacts.userDoctor[1] ? contacts.userDoctor[1].doctor_name : ''}
                     onChange={(event) => this.handleTherapistName(event)}
                 />
-                <ThirdTitle>Their Email</ThirdTitle>
+                <Lable>Their Email</Lable>
                 <Input
                     placeholder={contacts.userDoctor[1] ? contacts.userDoctor[1].email : ''}
                     onChange={(event) => this.handleTherapistEmail(event)}
                 />
-                <ThirdTitle>Their Phone Number</ThirdTitle>
+                <Lable>Their Phone Number</Lable>
                 <Input
                     placeholder={contacts.userDoctor[1] ? contacts.userDoctor[1].phone : ''}
                     onChange={(event) => this.handleTherapistPhone(event)}
                 />
+                <ButtonContainer>
+                    <Button onClick={() => this.saveInfo()}>
+                        <h1>Save</h1>
+                    </Button>
 
-                <button onClick={() => this.saveInfo()}>Save</button>
+                    <Link to={'/User_Main'}>
+                        <Button>
+                            <h1>Home</h1>
+                        </Button>
+                    </Link>
+                </ButtonContainer>
 
-            </div >
+
+            </InputParent>
 
         )
     }

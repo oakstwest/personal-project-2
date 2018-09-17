@@ -53,7 +53,6 @@ module.exports = {
 
   },
 
-
   updateDoctor: (req, res) => {
     const {
       doctor_id

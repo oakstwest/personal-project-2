@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Info_Entry.css'
+//import './Info_Entry.css'
 import axios from 'axios'
 
 class Info_Entry extends Component {
@@ -210,8 +210,8 @@ class Info_Entry extends Component {
             <div>
                 <h1> Lets Set Up Your Support System</h1>
 
-                <h2>Your Friend</h2> 
-                 <button onClick={() => this.updateFriend(
+                <h2>Your Friend</h2>
+                <button onClick={() => this.updateFriend(
                     contacts.userFriend[0].friend_id,
                     newData.friend1,
                     newData.email1,
@@ -258,7 +258,7 @@ class Info_Entry extends Component {
                 />
 
 
-                <h2>Another Friend</h2> 
+                <h2>Another Friend</h2>
                 <button onClick={() => this.updateFriend(
                     contacts.userFriend[2].friend_id,
                     newData.friend3,
@@ -282,7 +282,7 @@ class Info_Entry extends Component {
                 />
 
 
-                <h2>Another Friend</h2> 
+                <h2>Another Friend</h2>
                 <button onClick={() => this.updateFriend(
                     contacts.userFriend[3].friend_id,
                     newData.friend4,

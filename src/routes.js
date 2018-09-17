@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React  from 'react'
 import { Switch, Route, } from 'react-router-dom';
-
 import User_Main from './components/User_Main/User_Main';
 import Clouds from './components/Clouds/Clouds';
 import Crisis from './components/Crisis/Crisis';

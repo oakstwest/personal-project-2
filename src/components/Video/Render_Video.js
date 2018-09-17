@@ -8,6 +8,8 @@ import VideoDetail from './Video_Detail';
 import './Video.css';
 import Quotes from '../Quotes/Quotes';
 import { Link } from 'react-router-dom'
+import styled, { css } from 'styled-components'
+
 
 
 const {
@@ -39,17 +41,28 @@ class RenderVideo extends Component {
 
         return (
             <div>
+                <div>
+                    <Link to={'./User_Main'}>
+                        <button>
+                            <h1>Home</h1>
+                        </button>
+                    </Link>
+                </div>
+                <h5>
+                    <span>
+                        <Quotes />
+                    </span>
+                </h5>
 
-                <h5> <span><Quotes /></span> </h5>
-
-                <SearchBar onSearchTermChange={videoSearch} />
                 <VideoDetail video={this.state.selectedVideo} />
+                <h2-vid>Search</h2-vid>
+                <SearchBar onSearchTermChange={videoSearch} />
+
                 <VideoList
                     onVideoSelect={selectedVideo => this.setState({ selectedVideo })}
                     videos={this.state.videos} />
-                <div>
-                    <Link to={'./User_Main'}><button><h1>Home</h1></button></Link>
-                </div>
+
+
             </div>
         )
     }

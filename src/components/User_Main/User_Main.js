@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 //import './User_Main.css'
-import styled, { css,} from 'styled-components'
+import styled, { css} from 'styled-components'
 
 
 //css styling start//
@@ -107,19 +107,19 @@ class User_Main extends Component {
                 </SecTitle>
 
                 <div>
-                    <Link to={'./Video'}>
+                    <Link to={'./Video/blue'}>
                         <Button button2>
                             <h4>I'm Feeling A Little Blue</h4>
                         </Button>
                     </Link>
 
-                    <Link to={'./Video'}>
+                    <Link to={'./Video/clouds'}>
                         <Button button3>
                             <h4>The Clouds Are Rolling In</h4>
                         </Button>
                     </Link>
 
-                    <Link to={'./Video'}>
+                    <Link to={'./Video/crisis'}>
                         <Button button1>
                             <h4>I'm In Crisis</h4>
                         </Button>

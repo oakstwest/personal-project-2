@@ -4,14 +4,18 @@ import styled, { css, } from 'styled-components'
 
 const mainColor = 'black'
 const Span =styled.span`
-color: ${props => props.color || 'black'};
+color: ${props => props.color || 'red'};
+text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
   font-size: 2.8em;
   margin: 25px;
   padding-bottom: 20px;
   border-bottom: 1px solid ${mainColor};
   display: inline-block;
 `
-
 
 const Button = styled.button`
 border-radius: 5px;

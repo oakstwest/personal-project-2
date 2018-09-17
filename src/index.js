@@ -23,8 +23,11 @@ unregister();
 injectGlobal`
   body {
     background: url(https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+    background-attachment:fixed;
     background-color: #cccccc;
-    height: 950px;
+    min-height: 100vh;
+    height:auto;
+    position:absolute;
     width: auto ;
     background-position: center;
     background-repeat: no-repeat;

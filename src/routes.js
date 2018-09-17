@@ -15,7 +15,7 @@ export default (
         <Route path='/Clouds' component={Clouds} />
         <Route path='/Crisis' component={Crisis} />
         <Route path='/Info' component={Info_Entry} />
-        <Route path='/Video' component={Video}/>
+        <Route path='/Video/:goat' component={Video}/>
         <Route path='/Quotes' component={Quotes}/>
         
     </Switch>

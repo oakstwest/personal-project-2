@@ -4,6 +4,7 @@ const express = require('express')
   , massive = require('massive')
   , axios = require('axios')
   , controller = require('./controller')
+  , twilio = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_ID)
 
 
 const app = express();
@@ -112,6 +113,31 @@ app.put('/api/updateFriend/:friend_id', controller.updateFriend)
 
 // app.get('/test', controller.sendEmail)
 
+app.post('/api/twilio', (req, res) => {
+  twilio.messages
+  .create({
+    body:`Hey your friend ${req.session.user.user_name} is felling a bit down, please make sure you give them a call today and see how they're doing.`, 
+    from: '+15412303412',
+    to: `+1${req.body.number}`
+  })
+  .then(message => {
+    res.sendStatus(200)
+  })
+  .done();
+})
+
+app.post('/api/twilio/doc', (req, res) => {
+  twilio.messages
+  .create({
+    body:`Hey your patient ${req.session.user.user_name} is having a mental health crisis, please contact them as soon as possible.`, 
+    from: '+15412303412',
+    to: `+1${req.body.number}`
+  })
+  .then(message => {
+    res.sendStatus(200)
+  })
+  .done();
+})
 
 
 
